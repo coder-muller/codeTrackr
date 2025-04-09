@@ -5,39 +5,20 @@ import {
     SidebarContent,
     SidebarFooter,
     SidebarGroup,
+    SidebarGroupLabel,
     SidebarHeader,
     SidebarMenu,
-    SidebarMenuItem,
     SidebarMenuButton,
-    SidebarGroupLabel,
+    SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { useProjects } from "@/lib/contexts/ProjectContext"
 import { Code, Plus } from "lucide-react"
-import { Button } from "./ui/button"
+import { NewProjectButton } from "./project/ProjectDialog"
 import { useSidebar } from "./ui/sidebar"
 
-const projects = [
-    {
-        name: "CGM Dashboard",
-        id: "cgm-dashboard",
-    },
-    {
-        name: "EmitGo",
-        id: "emitgo",
-    },
-    {
-        name: "Schadule Pro",
-        id: "schadule-pro",
-    },
-    {
-        name: "Code Trackr",
-        id: "code-trackr",
-    },
-]
-
-
 export function AppSidebar() {
-
     const { open } = useSidebar()
+    const { projects, selectedProject, setSelectedProject } = useProjects()
 
     return (
         <Sidebar collapsible="icon">
@@ -47,6 +28,7 @@ export function AppSidebar() {
                         <SidebarMenuButton
                             size="lg"
                             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                            onClick={() => setSelectedProject(null)}
                         >
                             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
                                 <Code className="size-5" />
@@ -64,10 +46,7 @@ export function AppSidebar() {
             <SidebarContent>
                 <SidebarGroup>
                     {open ? (
-                        <Button variant="default" size="lg">
-                            <Plus className="size-5" />
-                            <span>New Project</span>
-                        </Button>
+                        <NewProjectButton />
                     ) : (
                         <SidebarMenu>
                             <SidebarMenuItem>
@@ -88,7 +67,10 @@ export function AppSidebar() {
                     <SidebarMenu>
                         {projects.map((project) => (
                             <SidebarMenuItem key={project.id}>
-                                <SidebarMenuButton className="text-sidebar-foreground/70 cursor-pointer">
+                                <SidebarMenuButton 
+                                    className={`text-sidebar-foreground/70 cursor-pointer ${selectedProject?.id === project.id ? 'bg-sidebar-accent text-sidebar-accent-foreground font-medium' : ''}`}
+                                    onClick={() => setSelectedProject(project)}
+                                >
                                     <span>{project.name}</span>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
