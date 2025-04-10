@@ -317,7 +317,7 @@ export function NewProjectButton() {
   return (
     <ProjectDialog
       trigger={
-        <Button className="gap-2">
+        <Button className="gap-2 w-full sm:w-auto">
           <PlusCircle className="size-4" />
           New Project
         </Button>

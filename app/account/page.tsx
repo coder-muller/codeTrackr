@@ -163,12 +163,17 @@ function ProjectMarkdown({ project }: { project: Project }) {
             <span className="inline-block w-2 h-2 bg-primary rounded-full mr-2"></span>
             Activity History
           </h2>
-          <div className="space-y-4">
-            {project.logs.map((log, index) => (
-              <LogItem key={index} log={log} index={index} project={project} />
+          <AddLogButton project={project} />
+          <div className="space-y-4 mt-4">
+            {[...project.logs].reverse().map((log, index) => (
+              <LogItem 
+                key={index} 
+                log={log} 
+                index={project.logs!.length - 1 - index} 
+                project={project} 
+              />
             ))}
           </div>
-          <AddLogButton project={project} />
         </div>
       )}
 
@@ -178,11 +183,11 @@ function ProjectMarkdown({ project }: { project: Project }) {
             <span className="inline-block w-2 h-2 bg-primary rounded-full mr-2"></span>
             Activity History
           </h2>
+          <AddLogButton project={project} />
           <div className="text-center py-6 text-muted-foreground">
             <p>No events recorded</p>
             <p className="text-sm">Add events to track activity history</p>
           </div>
-          <AddLogButton project={project} />
         </div>
       ) : null}
     </div>
@@ -489,14 +494,23 @@ function AddLogButton({ project }: { project: Project }) {
     setIsOpen(false);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    // Se pressionar Enter sem Shift, submete o formulário
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault(); // Previne quebra de linha
+      handleSubmit(e);
+    }
+  };
+
   return (
-    <div className="mt-4">
+    <div className="mb-4">
       {isOpen ? (
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           <textarea
             value={logMessage}
             onChange={(e) => setLogMessage(e.target.value)}
-            placeholder="Describe the event or activity..."
+            onKeyDown={handleKeyDown}
+            placeholder="Describe the event or activity... (Press Enter to save, Shift+Enter for new line)"
             className="w-full px-3 py-2 text-sm rounded-md border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 min-h-20"
             autoFocus
           />
@@ -630,7 +644,7 @@ export default function Account() {
   // Estado inicial ou sem resultado de busca
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col sm:flex-row gap-2 sm:justify-between items-center mt-2 sm:mt-0 mb-6">
         <h2 className="text-2xl font-bold text-center">Welcome to Project Dashboard</h2>
         <NewProjectButton />
       </div>

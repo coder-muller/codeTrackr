@@ -3,6 +3,8 @@
 import { Project } from "@/lib/types";
 import { createContext, useContext, useState } from "react";
 
+type FilterType = "stack" | "tags" | null;
+
 interface ProjectContextType {
     projects: Project[];
     selectedProject: Project | null;
@@ -12,6 +14,8 @@ interface ProjectContextType {
     searchResults: Project[];
     setProjects: (projects: Project[]) => void;
     deleteProject: (projectId: string) => void;
+    activeFilter: FilterType;
+    setActiveFilter: (filter: FilterType) => void;
 }
 
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
@@ -20,18 +24,30 @@ export function ProjectProvider({ children, initialProjects }: { children: React
     const [projects, setProjectsState] = useState<Project[]>(initialProjects);
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [searchTerm, setSearchTerm] = useState("");
+    const [activeFilter, setActiveFilter] = useState<FilterType>(null);
 
-    // Filtrar projetos com base no termo de busca
+    // Filtrar projetos com base no termo de busca e filtro ativo
     const searchResults = searchTerm.trim() === "" ? [] : projects.filter(project => {
         const searchLower = searchTerm.toLowerCase();
-        return (
-            project.name.toLowerCase().includes(searchLower) ||
-            project.description.toLowerCase().includes(searchLower) ||
-            project.stack.some(tech => tech.toLowerCase().includes(searchLower)) ||
-            project.tags.some(tag => tag.toLowerCase().includes(searchLower)) ||
-            project.repository.toLowerCase().includes(searchLower) ||
-            project.logs?.some(log => log.message.toLowerCase().includes(searchLower))
-        );
+
+        // Se tiver um filtro ativo, pesquisar apenas no campo especificado
+        if (activeFilter === "stack") {
+            return project.stack.some(tech => tech.toLowerCase().includes(searchLower));
+        } 
+        else if (activeFilter === "tags") {
+            return project.tags.some(tag => tag.toLowerCase().includes(searchLower));
+        } 
+        // Pesquisa padrão em todos os campos
+        else {
+            return (
+                project.name.toLowerCase().includes(searchLower) ||
+                project.description.toLowerCase().includes(searchLower) ||
+                project.stack.some(tech => tech.toLowerCase().includes(searchLower)) ||
+                project.tags.some(tag => tag.toLowerCase().includes(searchLower)) ||
+                (project.repository && project.repository.toLowerCase().includes(searchLower)) ||
+                project.logs?.some(log => log.message.toLowerCase().includes(searchLower))
+            );
+        }
     });
 
     // Função para atualizar a lista de projetos
@@ -66,7 +82,9 @@ export function ProjectProvider({ children, initialProjects }: { children: React
             setSearchTerm,
             searchResults,
             setProjects,
-            deleteProject
+            deleteProject,
+            activeFilter,
+            setActiveFilter
         }}>
             {children}
         </ProjectContext.Provider>
