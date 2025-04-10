@@ -76,7 +76,7 @@ function ProjectMarkdown({ project }: { project: Project }) {
               <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
               <path d="M9 18c-4.51 2-5-2-7-2"></path>
             </svg>
-            <span className="truncate">{project.repository.replace('https://github.com/', '')}</span>
+            <span className="truncate">{project.repository ? project.repository.replace('https://github.com/', '') : '-'}</span>
           </a>
         </div>
       </div>
@@ -298,7 +298,6 @@ function TodoForm({ project }: { project: Project }) {
         onChange={(e) => setNewTodo(e.target.value)}
         placeholder="Add new task..."
         className="flex-1 bg-transparent border-none outline-none focus:ring-0 placeholder-muted-foreground/70"
-        autoFocus
       />
     </form>
   );
@@ -454,7 +453,6 @@ function IdeaForm({ project }: { project: Project }) {
         onChange={(e) => setNewIdea(e.target.value)}
         placeholder="Add new idea..."
         className="flex-1 bg-transparent border-none outline-none focus:ring-0 placeholder-muted-foreground/70"
-        autoFocus
       />
     </form>
   );
@@ -655,31 +653,8 @@ export default function Account() {
 
             <div className="flex flex-wrap gap-2 mt-3">
               {project.stack.map(tech => {
-                let bgColor = '';
-
-                if (tech.toLowerCase().includes('react'))
-                  bgColor = 'bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200';
-                else if (tech.toLowerCase().includes('vue'))
-                  bgColor = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200';
-                else if (tech.toLowerCase().includes('angular'))
-                  bgColor = 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
-                else if (tech.toLowerCase().includes('node') || tech.toLowerCase().includes('express'))
-                  bgColor = 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-                else if (tech.toLowerCase().includes('python'))
-                  bgColor = 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
-                else if (tech.toLowerCase().includes('laravel') || tech.toLowerCase().includes('php'))
-                  bgColor = 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200';
-                else if (tech.toLowerCase().includes('mysql') || tech.toLowerCase().includes('sql'))
-                  bgColor = 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200';
-                else if (tech.toLowerCase().includes('mongo'))
-                  bgColor = 'bg-lime-100 text-lime-800 dark:bg-lime-900 dark:text-lime-200';
-                else if (tech.toLowerCase().includes('oracle'))
-                  bgColor = 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200';
-                else
-                  bgColor = 'bg-secondary text-secondary-foreground';
-
                 return (
-                  <span key={tech} className={`px-2 py-1 rounded-md text-xs font-medium ${bgColor}`}>
+                  <span key={tech} className={`px-2 py-1 rounded-md text-xs font-medium border border-border`}>
                     {tech}
                   </span>
                 );

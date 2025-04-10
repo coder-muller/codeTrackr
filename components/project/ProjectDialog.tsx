@@ -2,29 +2,32 @@
 
 import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useProjects } from "@/lib/contexts/ProjectContext";
 import { Project } from "@/lib/types";
-import { Edit2, PlusCircle } from "lucide-react";
+import { Edit2, Plus, PlusCircle } from "lucide-react";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import { SidebarMenuButton } from "../ui/sidebar";
+import { SidebarMenuItem } from "../ui/sidebar";
+import { SidebarMenu } from "../ui/sidebar";
 
 type ProjectFormProps = {
   project?: Project;
@@ -53,7 +56,7 @@ function ProjectForm({ project, onOpenChange }: ProjectFormProps) {
   );
   const [tagInput, setTagInput] = useState("");
   const [stackInput, setStackInput] = useState("");
-  
+
   const isEditing = !!project;
 
   const handleInputChange = (
@@ -116,7 +119,7 @@ function ProjectForm({ project, onOpenChange }: ProjectFormProps) {
 
     if (isEditing && project) {
       // Update existing project
-      const updatedProjects = projects.map(p => 
+      const updatedProjects = projects.map(p =>
         p.id === project.id ? { ...formData as Project } : p
       );
       setProjects(updatedProjects);
@@ -126,7 +129,7 @@ function ProjectForm({ project, onOpenChange }: ProjectFormProps) {
         ...formData,
         id: uuidv4()
       } as Project;
-      
+
       setProjects([...projects, newProject]);
     }
 
@@ -163,14 +166,14 @@ function ProjectForm({ project, onOpenChange }: ProjectFormProps) {
         <div className="grid grid-cols-2 gap-4">
           <div className="grid gap-2">
             <Label htmlFor="status">Status</Label>
-            <Select 
+            <Select
               value={formData.status}
               onValueChange={(value) => handleSelectChange("status", value)}
             >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select status" />
               </SelectTrigger>
-              <SelectContent> 
+              <SelectContent>
                 <SelectItem value="in planning">In Planning</SelectItem>
                 <SelectItem value="in development">In Development</SelectItem>
                 <SelectItem value="completed">Completed</SelectItem>
@@ -180,7 +183,7 @@ function ProjectForm({ project, onOpenChange }: ProjectFormProps) {
 
           <div className="grid gap-2">
             <Label htmlFor="priority">Priority</Label>
-            <Select 
+            <Select
               value={formData.priority}
               onValueChange={(value) => handleSelectChange("priority", value)}
             >
@@ -219,13 +222,13 @@ function ProjectForm({ project, onOpenChange }: ProjectFormProps) {
           {(formData.stack || []).length > 0 && (
             <div className="flex flex-wrap gap-2 mt-2">
               {(formData.stack || []).map((tech, i) => (
-                <div 
-                  key={i} 
+                <div
+                  key={i}
                   className="px-2 py-1 bg-secondary text-secondary-foreground rounded-md text-sm flex items-center gap-1"
                 >
                   {tech}
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={() => removeStackItem(tech)}
                     className="text-muted-foreground hover:text-destructive ml-1"
                   >
@@ -249,13 +252,13 @@ function ProjectForm({ project, onOpenChange }: ProjectFormProps) {
           {(formData.tags || []).length > 0 && (
             <div className="flex flex-wrap gap-2 mt-2">
               {(formData.tags || []).map((tag, i) => (
-                <div 
-                  key={i} 
+                <div
+                  key={i}
                   className="px-2 py-1 bg-muted text-muted-foreground rounded-md text-sm flex items-center gap-1"
                 >
                   #{tag}
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={() => removeTag(tag)}
                     className="text-muted-foreground hover:text-destructive ml-1"
                   >
@@ -299,8 +302,8 @@ export function ProjectDialog({ project, trigger }: ProjectDialogProps) {
             {project ? 'Edit Project' : 'Create New Project'}
           </DialogTitle>
           <DialogDescription>
-            {project 
-              ? 'Update project details and settings.' 
+            {project
+              ? 'Update project details and settings.'
               : 'Fill in the information to create a new project.'}
           </DialogDescription>
         </DialogHeader>
@@ -312,26 +315,47 @@ export function ProjectDialog({ project, trigger }: ProjectDialogProps) {
 
 export function NewProjectButton() {
   return (
-    <ProjectDialog 
+    <ProjectDialog
       trigger={
         <Button className="gap-2">
           <PlusCircle className="size-4" />
           New Project
         </Button>
-      } 
+      }
+    />
+  );
+}
+
+export function NewProjectSmallButton() {
+  return (
+    <ProjectDialog
+      trigger={
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              size="lg"
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+            >
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground cursor-pointer">
+                <Plus className="size-5" />
+              </div>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      }
     />
   );
 }
 
 export function EditProjectButton({ project }: { project: Project }) {
   return (
-    <ProjectDialog 
+    <ProjectDialog
       project={project}
       trigger={
         <Button variant="ghost" size="icon" className="h-8 w-8">
           <Edit2 className="size-4" />
         </Button>
-      } 
+      }
     />
   );
 } 
