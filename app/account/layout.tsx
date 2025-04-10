@@ -247,10 +247,10 @@ function SearchInput() {
 
 function RetornarParaHome() {
     const { setSelectedProject } = useProjects();
-    
+
     return (
-        <button 
-            onClick={() => setSelectedProject(null)} 
+        <button
+            onClick={() => setSelectedProject(null)}
             className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
         >
             <ChevronLeft className="size-4" />
@@ -273,7 +273,7 @@ export default function AccountLayout({
 
 function AccountContent({ children }: { children: React.ReactNode }) {
     const { selectedProject } = useProjects();
-    
+
     return (
         <SidebarProvider>
             <AppSidebar />
