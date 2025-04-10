@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { ProjectProvider, useProjects } from "@/lib/contexts/ProjectContext";
 import { Project } from "@/lib/types";
-import { SearchIcon } from "lucide-react";
+import { ChevronLeft, SearchIcon } from "lucide-react";
 
 const databaseFake: Project[] = [
     {
@@ -245,6 +245,20 @@ function SearchInput() {
     );
 }
 
+function RetornarParaHome() {
+    const { setSelectedProject } = useProjects();
+    
+    return (
+        <button 
+            onClick={() => setSelectedProject(null)} 
+            className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+        >
+            <ChevronLeft className="size-4" />
+            All Projects
+        </button>
+    );
+}
+
 export default function AccountLayout({
     children,
 }: {
@@ -252,21 +266,33 @@ export default function AccountLayout({
 }) {
     return (
         <ProjectProvider initialProjects={databaseFake}>
-            <SidebarProvider>
-                <AppSidebar />
-                <main className="flex flex-col w-full h-screen">
-                    <div className="flex items-center justify-between w-full border-b p-2">
-                        <div className="flex items-center gap-2">
-                            <SidebarTrigger />
-                            <SearchInput />
-                        </div>
-                        <ModeToggle />
-                    </div>
-                    <div className="flex-1 p-2 w-full h-full overflow-y-auto">
-                        {children}
-                    </div>
-                </main>
-            </SidebarProvider>
+            <AccountContent>{children}</AccountContent>
         </ProjectProvider>
+    );
+}
+
+function AccountContent({ children }: { children: React.ReactNode }) {
+    const { selectedProject } = useProjects();
+    
+    return (
+        <SidebarProvider>
+            <AppSidebar />
+            <main className="flex flex-col w-full h-screen">
+                <div className="flex items-center justify-between w-full border-b p-2">
+                    <div className="flex items-center gap-2">
+                        <SidebarTrigger />
+                        {selectedProject ? (
+                            <RetornarParaHome />
+                        ) : (
+                            <SearchInput />
+                        )}
+                    </div>
+                    <ModeToggle />
+                </div>
+                <div className="flex-1 p-2 w-full h-full overflow-y-auto">
+                    {children}
+                </div>
+            </main>
+        </SidebarProvider>
     );
 }

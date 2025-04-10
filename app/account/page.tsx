@@ -597,7 +597,7 @@ export default function Account() {
   const { selectedProject, searchResults, setSelectedProject, searchTerm, projects } = useProjects();
 
   // Se tiver um projeto selecionado, mostrar os detalhes
-  if (selectedProject && !searchTerm) {
+  if (selectedProject) {
     return <ProjectMarkdown project={selectedProject} />;
   }
 
