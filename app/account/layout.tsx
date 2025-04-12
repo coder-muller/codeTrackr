@@ -238,7 +238,7 @@ function SearchInput() {
         // CTRL+Enter para adicionar filtros
         if (e.ctrlKey && e.key === "Enter") {
             const term = searchTerm.trim().toLowerCase();
-            
+
             if (term.startsWith("stk")) {
                 setActiveFilter("stack");
                 setSearchTerm(term.replace("stk", "").trim());
@@ -276,8 +276,8 @@ function SearchInput() {
             <Input
                 ref={inputRef}
                 type="text"
-                placeholder={activeFilter 
-                    ? `Searching in ${activeFilter === "stack" ? "Tech Stack" : "Tags"}...` 
+                placeholder={activeFilter
+                    ? `Searching in ${activeFilter === "stack" ? "Tech Stack" : "Tags"}...`
                     : "Search projects..."
                 }
                 className="pl-8 w-full pr-32"
@@ -286,21 +286,20 @@ function SearchInput() {
                 onKeyDown={handleKeyDown}
             />
             <SearchIcon className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground size-4" />
-            
+
             {activeFilter && (
                 <div className="absolute right-2 flex items-center gap-1 z-10">
-                    <div className={`flex items-center gap-1 text-xs px-2 py-1 rounded-md ${
-                        activeFilter === "stack" 
-                            ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400" 
+                    <div className={`flex items-center gap-1 text-xs px-2 py-1 rounded-md ${activeFilter === "stack"
+                            ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
                             : "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400"
-                    }`}>
+                        }`}>
                         {activeFilter === "stack" ? (
                             <Layers className="h-3 w-3" />
                         ) : (
                             <Tag className="h-3 w-3" />
                         )}
                         <span>{activeFilter === "stack" ? "Tech Stack" : "Tags"}</span>
-                        <button 
+                        <button
                             onClick={clearFilter}
                             className="hover:text-foreground ml-1"
                         >
@@ -351,7 +350,7 @@ function AccountContent({ children }: { children: React.ReactNode }) {
             <main className="flex flex-col w-full h-screen">
                 <div className="flex items-center w-full border-b p-2 gap-2">
                     <SidebarTrigger />
-                    
+
                     <div className="flex-1">
                         {selectedProject ? (
                             <RetornarParaHome />
@@ -359,7 +358,7 @@ function AccountContent({ children }: { children: React.ReactNode }) {
                             <SearchInput />
                         )}
                     </div>
-                    
+
                     <ModeToggle />
                 </div>
                 <div className="flex-1 p-2 w-full h-full overflow-y-auto">

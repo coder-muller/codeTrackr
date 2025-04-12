@@ -11,18 +11,19 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { useIsMobile } from "@/hooks/use-mobile"
 import { useProjects } from "@/lib/contexts/ProjectContext"
 import { Code } from "lucide-react"
 import { NewProjectButton, NewProjectSmallButton } from "./project/ProjectDialog"
 import { useSidebar } from "./ui/sidebar"
-import { useIsMobile } from "@/hooks/use-mobile"
 export function AppSidebar() {
-    const { open, setOpen } = useSidebar()
+
+    const { open, setOpenMobile } = useSidebar()
     const isMobile = useIsMobile()
     const { projects, selectedProject, setSelectedProject } = useProjects()
 
     return (
-        <Sidebar collapsible="icon">
+        <Sidebar collapsible="icon" variant="sidebar">
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem className="cursor-pointer">
@@ -62,7 +63,7 @@ export function AppSidebar() {
                                     onClick={() => {
                                         setSelectedProject(project)
                                         if (isMobile) {
-                                            setOpen(false)
+                                            setOpenMobile(false)
                                         }
                                     }}
                                 >
