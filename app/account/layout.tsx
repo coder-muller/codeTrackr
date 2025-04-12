@@ -12,58 +12,58 @@ import { KeyboardEvent, useEffect, useRef } from "react";
 const databaseFake: Project[] = [
     {
         id: "21a4fa7a-3bfa-4a99-97d8-11cab956e634",
-        name: "GestãoFácil",
-        description: "Sistema completo para gestão empresarial com módulos de finanças, estoque, vendas e recursos humanos. Interface intuitiva e relatórios personalizados para pequenas e médias empresas.",
+        name: "EasyManage",
+        description: "Complete system for business management with modules for finance, stock, sales and human resources. Intuitive interface and personalized reports for small and medium-sized companies.",
         stack: ["React", "Node.js", "PostgreSQL", "TypeScript", "Redis", "Docker"],
         status: "in development",
         startDate: "2024-02-10T03:00:00.000Z",
         endDate: null,
         repository: "https://github.com/code-dev-br/gestao-facil",
-        tags: ["Gestão", "ERP", "Finanças", "B2B"],
+        tags: ["Management", "ERP", "Finance", "B2B"],
         priority: "high",
         logs: [
             {
                 date: "2024-02-10T03:00:00.000Z",
-                message: "Início do projeto com configuração da arquitetura base"
+                message: "Project started with base architecture configuration"
             },
             {
                 date: "2024-02-25T03:00:00.000Z",
-                message: "Implementação dos componentes principais e estrutura de banco de dados"
+                message: "Implementation of main components and database structure"
             },
             {
                 date: "2024-03-12T03:00:00.000Z",
-                message: "Módulo financeiro concluído com integração bancária"
+                message: "Financial module completed with bank integration"
             },
             {
                 date: "2024-03-30T03:00:00.000Z",
-                message: "Sistema de autenticação e permissões implementado"
+                message: "Authentication and permission system implemented"
             },
             {
                 date: "2024-04-15T03:00:00.000Z",
-                message: "Testes de integração adicionados para fluxos principais"
+                message: "Integration tests added for main flows"
             }
         ],
         todo: [
             {
-                description: "Implementar integração com sistemas de pagamento",
+                description: "Implement integration with payment systems",
                 status: false,
                 createdAt: "2024-02-12T03:00:00.000Z",
                 updatedAt: "2024-02-12T03:00:00.000Z"
             },
             {
-                description: "Criar dashboard principal com widgets personalizáveis",
+                description: "Create main dashboard with customizable widgets",
                 status: true,
                 createdAt: "2024-02-20T03:00:00.000Z",
                 updatedAt: "2024-03-05T03:00:00.000Z"
             },
             {
-                description: "Desenvolver módulo de controle de estoque",
+                description: "Develop stock control module",
                 status: false,
                 createdAt: "2024-03-15T03:00:00.000Z",
                 updatedAt: "2024-03-15T03:00:00.000Z"
             },
             {
-                description: "Implementar sistema de notificações em tempo real",
+                description: "Implement real-time notification system",
                 status: false,
                 createdAt: "2024-03-28T03:00:00.000Z",
                 updatedAt: "2024-03-28T03:00:00.000Z"
@@ -71,19 +71,19 @@ const databaseFake: Project[] = [
         ],
         ideas: [
             {
-                description: "Adicionar análise preditiva para vendas com IA",
+                description: "Add predictive analysis for sales with AI",
                 status: "approved",
                 createdAt: "2024-02-18T03:00:00.000Z",
                 updatedAt: "2024-02-20T03:00:00.000Z"
             },
             {
-                description: "Implementar modo escuro/claro com detecção automática",
+                description: "Implement dark/light mode with automatic detection",
                 status: "pending",
                 createdAt: "2024-03-05T03:00:00.000Z",
                 updatedAt: "2024-03-05T03:00:00.000Z"
             },
             {
-                description: "Criar aplicativo móvel complementar",
+                description: "Create complementary mobile application",
                 status: "rejected",
                 createdAt: "2024-03-18T03:00:00.000Z",
                 updatedAt: "2024-03-25T03:00:00.000Z"
@@ -92,8 +92,8 @@ const databaseFake: Project[] = [
     },
     {
         id: "31b5fb8b-4cfa-5b99-98d8-22dbc957f745",
-        name: "DeliveryJá",
-        description: "Plataforma completa para delivery de alimentos com aplicativo para clientes, restaurantes e entregadores. Sistema de rastreamento em tempo real e integração com meios de pagamento.",
+        name: "DeliveryNow",
+        description: "Complete platform for food delivery with application for customers, restaurants and delivery people. Real-time tracking system and integration with payment methods.",
         stack: ["React Native", "Node.js", "MongoDB", "Socket.io", "AWS"],
         status: "in planning",
         startDate: "2024-03-05T03:00:00.000Z",
@@ -104,16 +104,16 @@ const databaseFake: Project[] = [
         logs: [
             {
                 date: "2024-03-05T03:00:00.000Z",
-                message: "Reunião inicial com stakeholders para definição de requisitos"
+                message: "Initial meeting with stakeholders to define requirements"
             },
             {
                 date: "2024-03-15T03:00:00.000Z",
-                message: "Conclusão do documento de especificação técnica"
+                message: "Conclusion of the technical specification document"
             }
         ],
         todo: [
             {
-                description: "Criar estrutura inicial do projeto",
+                description: "Create initial project structure",
                 status: false,
                 createdAt: "2024-03-18T03:00:00.000Z",
                 updatedAt: "2024-03-18T03:00:00.000Z"
@@ -123,68 +123,68 @@ const databaseFake: Project[] = [
     },
     {
         id: "41c6gc9c-5dfb-6c99-99e9-33ecd958g856",
-        name: "ClinicaCloud",
-        description: "Sistema de gestão para clínicas médicas com agendamento online, prontuário eletrônico e faturamento integrado. Inclui aplicativo para pacientes e integração com planos de saúde.",
+        name: "ClinicCloud",
+        description: "Management system for medical clinics with online scheduling, electronic medical records and integrated billing. Includes patient application and integration with health plans.",
         stack: ["Vue.js", "Laravel", "MySQL", "Redis", "Flutter"],
         status: "in development",
         startDate: "2024-01-15T03:00:00.000Z",
         endDate: null,
         repository: "https://github.com/code-dev-br/clinica-cloud",
-        tags: ["Saúde", "Gestão", "B2B", "SaaS"],
+        tags: ["Health", "Management", "B2B", "SaaS"],
         priority: "medium"
     },
     {
         id: "51d7hd0d-6egc-7d99-00f0-44fde059h967",
         name: "EcoTrack",
-        description: "Aplicativo para monitoramento e redução da pegada de carbono pessoal e empresarial. Inclui calculadora de emissões, sugestões personalizadas e certificados de compensação.",
+        description: "Application for monitoring and reducing personal and business carbon footprint. Includes emissions calculator, personalized suggestions and compensation certificates.",
         stack: ["React", "Python", "Django", "PostgreSQL", "TensorFlow"],
         status: "completed",
         startDate: "2023-11-10T03:00:00.000Z",
         endDate: "2024-02-25T03:00:00.000Z",
         repository: "https://github.com/code-dev-br/ecotrack",
-        tags: ["Sustentabilidade", "Meio Ambiente", "ESG", "B2C"],
+        tags: ["Sustainability", "Environment", "ESG", "B2C"],
         priority: "medium",
         logs: [
             {
                 date: "2023-11-10T03:00:00.000Z",
-                message: "Início do desenvolvimento com configuração do ambiente"
+                message: "Start of development with environment configuration"
             },
             {
                 date: "2023-12-05T03:00:00.000Z",
-                message: "Primeira versão do backend concluída"
+                message: "First version of the backend completed"
             },
             {
                 date: "2024-01-15T03:00:00.000Z",
-                message: "Interface do usuário finalizada com todos os componentes"
+                message: "User interface finalized with all components"
             },
             {
                 date: "2024-02-10T03:00:00.000Z",
-                message: "Testes de integração e desempenho concluídos"
+                message: "Integration and performance tests completed"
             },
             {
                 date: "2024-02-25T03:00:00.000Z",
-                message: "Projeto finalizado e entregue ao cliente"
+                message: "Project completed and delivered to the client"
             }
         ]
     },
     {
         id: "61e8ie1e-7fhd-8e99-11g1-55gef150i078",
-        name: "PortalTransparência",
-        description: "Portal de transparência para órgãos públicos com visualização de dados orçamentários, licitações e contratos. Sistema completo com painéis interativos e exportação de relatórios.",
+        name: "TransparencyPortal",
+        description: "Transparency portal for public bodies with visualization of budgetary data, tenders and contracts. Complete system with interactive panels and report export.",
         stack: ["React", "Express", "Oracle", "D3.js", "Material UI"],
         status: "in planning",
         startDate: "2024-04-05T03:00:00.000Z",
         endDate: null,
         repository: "https://github.com/code-dev-br/portal-transparencia",
-        tags: ["Governo", "Transparência", "Dados Públicos", "Cidadania"],
+        tags: ["Government", "Transparency", "Public Data", "Citizenship"],
         priority: "high"
     },
     {
         id: "71f9jf2f-8gie-9f99-22h2-66hfg261j189",
         repository: "https://github.com/code-dev-br/fit-connect",
-        tags: ["Saúde", "Fitness", "Mobile", "B2C"],
+        tags: ["Health", "Fitness", "Mobile", "B2C"],
         name: "FitConnect",
-        description: "Aplicativo de fitness com planos de treino personalizados, monitoramento de progresso e integração com dispositivos wearable",
+        description: "Fitness app with personalized workout plans, progress tracking and integration with wearable devices",
         stack: ["React Native", "Firebase", "Node.js", "TensorFlow Lite"],
         status: "in development",
         startDate: "2023-12-10T03:00:00.000Z",
@@ -193,34 +193,34 @@ const databaseFake: Project[] = [
         logs: [
             {
                 date: "2023-12-10T03:00:00.000Z",
-                message: "Início do projeto"
+                message: "Project start"
             },
             {
                 date: "2024-01-20T03:00:00.000Z",
-                message: "Primeiras telas desenvolvidas"
+                message: "First screens developed"
             }
         ]
     },
     {
         id: "81g0kg3g-9hjf-0g99-33i3-77igh372k290",
         name: "EduBrasil",
-        description: "Plataforma de ensino online com recursos de gamificação e aprendizado adaptativo baseado em IA para escolas públicas brasileiras",
+        description: "Online teaching platform with gamification resources and adaptive learning based on AI for Brazilian public schools",
         stack: ["Next.js", "Python", "PostgreSQL", "TensorFlow", "AWS"],
         status: "completed",
         startDate: "2023-08-15T03:00:00.000Z",
         endDate: "2024-01-25T03:00:00.000Z",
         repository: "https://github.com/code-dev-br/edubrasil",
-        tags: ["Educação", "IA", "Ensino", "Impacto Social"],
+        tags: ["Education", "AI", "Teaching", "Social Impact"],
         priority: "high",
         todo: [
             {
-                description: "Implementar módulo de certificados",
+                description: "Implement certificates module",
                 status: true,
                 createdAt: "2023-09-20T03:00:00.000Z",
                 updatedAt: "2023-10-25T03:00:00.000Z"
             },
             {
-                description: "Criar sistema de recomendação de cursos",
+                description: "Create course recommendation system",
                 status: true,
                 createdAt: "2023-10-10T03:00:00.000Z",
                 updatedAt: "2023-12-15T03:00:00.000Z"
