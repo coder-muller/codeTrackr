@@ -15,9 +15,10 @@ import { useProjects } from "@/lib/contexts/ProjectContext"
 import { Code } from "lucide-react"
 import { NewProjectButton, NewProjectSmallButton } from "./project/ProjectDialog"
 import { useSidebar } from "./ui/sidebar"
-
+import { useIsMobile } from "@/hooks/use-mobile"
 export function AppSidebar() {
-    const { open } = useSidebar()
+    const { open, setOpen } = useSidebar()
+    const isMobile = useIsMobile()
     const { projects, selectedProject, setSelectedProject } = useProjects()
 
     return (
@@ -58,7 +59,12 @@ export function AppSidebar() {
                             <SidebarMenuItem key={project.id}>
                                 <SidebarMenuButton
                                     className={`text-sidebar-foreground/70 cursor-pointer ${selectedProject?.id === project.id ? 'bg-sidebar-accent text-sidebar-accent-foreground font-medium' : ''}`}
-                                    onClick={() => setSelectedProject(project)}
+                                    onClick={() => {
+                                        setSelectedProject(project)
+                                        if (isMobile) {
+                                            setOpen(false)
+                                        }
+                                    }}
                                 >
                                     <span>{project.name}</span>
                                 </SidebarMenuButton>
